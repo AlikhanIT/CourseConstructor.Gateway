@@ -4,11 +4,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{296CE32B-BD1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{40B11AB4-60F7-432D-892D-8F7F0F974ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.API", "CourseConstructor.CourseService.API\CourseConstructor.CourseService.API.csproj", "{01A4F943-F5BD-440E-BA33-EB5233F1CC11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.API", "src\CourseConstructor.CourseService.API\CourseConstructor.CourseService.API.csproj", "{01A4F943-F5BD-440E-BA33-EB5233F1CC11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.CORE", "CourseConstructor.CourseService.CORE\CourseConstructor.CourseService.CORE.csproj", "{AB7708AE-2FFC-4231-B493-4E57AB72216C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.CORE", "src\CourseConstructor.CourseService.CORE\CourseConstructor.CourseService.CORE.csproj", "{AB7708AE-2FFC-4231-B493-4E57AB72216C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.Infrastructure", "CourseConstructor.CourseService.Infrastructure\CourseConstructor.CourseService.Infrastructure.csproj", "{AD228B9D-2FB8-4B5B-9F20-0567A058CBF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseConstructor.CourseService.Infrastructure", "src\CourseConstructor.CourseService.Infrastructure\CourseConstructor.CourseService.Infrastructure.csproj", "{AD228B9D-2FB8-4B5B-9F20-0567A058CBF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
