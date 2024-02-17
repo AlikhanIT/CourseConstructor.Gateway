@@ -1,0 +1,12 @@
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\bin\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.deps.json
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\bin\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.dll
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\bin\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.pdb
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.AssemblyInfo.cs
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.sourcelink.json
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.dll
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\refint\CourseConstructor.CourseService.Infrastructure.dll
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\CourseConstructor.CourseService.Infrastructure.pdb
+C:\Users\almor\RiderProjects\CourseConstructor.Gateway\CourseConstructor.CourseService\CourseConstructor.CourseService.Infrastructure\obj\Debug\net7.0\ref\CourseConstructor.CourseService.Infrastructure.dll

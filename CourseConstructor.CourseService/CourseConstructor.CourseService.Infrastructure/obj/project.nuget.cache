@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Z6jQhWcPxVsBj81efq2M3edtBLbeOOHOAXGLOnAn7ssLM72qB9lsKfbwiboCSeTPvJNeduuRvMqWkv/Dop2UBg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\almor\\RiderProjects\\CourseConstructor.Gateway\\CourseConstructor.CourseService\\CourseConstructor.CourseService.Infrastructure\\CourseConstructor.CourseService.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\almor\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.15\\microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\almor\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.15\\microsoft.windowsdesktop.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\almor\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.15\\microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}
