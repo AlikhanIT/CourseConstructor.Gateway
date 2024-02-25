@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\CourseConstructor.CourseService.API.props" />
-</Project>
