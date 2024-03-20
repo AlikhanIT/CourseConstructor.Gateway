@@ -1,6 +1,6 @@
 namespace CourseConstructors.CourseConstructors.API;
-
-public class AssemblyReference
-{
-    
-}
+/*
+/// <summary>
+/// Файл сборки
+/// </summary>
+public class AssemblyReference;*/

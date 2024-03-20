@@ -1,11 +1,12 @@
+using CourseConstructors.CourseConstructors.Core;
 using CourseConstructors.CourseConstructors.Core.Common.SharedResponses;
-using CourseConstructors.CourseConstructors.Core.Resources;
-using CourseConstructors.CourseConstructors.Core.Resources;
+using CourseConstructors.CourseConstructors.Core.Interfaces.Services;
+using CourseConstructors.CourseConstructors.Core.Options;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 
-namespace CourseConstructors.CourseConstructors.API.Controllers;
+namespace CourseConstructors.CourseConstructors.API.Controllers.v1;
 /// <summary>
 /// CRUD контроллер для курсов
 /// </summary>
@@ -14,12 +15,24 @@ namespace CourseConstructors.CourseConstructors.API.Controllers;
 [ApiController]
 public class CourseController : BaseController
 {
-    private readonly IDistributedCache _distributedCache;
+    private readonly IDistributedCacheService _distributedCacheService;
     private readonly IStringLocalizer<SharedResource> _localizer;
-    public CourseController(IDistributedCache distributedCache, IStringLocalizer<SharedResource> localizer)
+    private readonly TestOptions _testOptions;
+    /// <summary>
+    /// Параметризированный конструктор для контроллера
+    /// </summary>
+    /// <param name="localizer"></param>
+    /// <param name="distributedCacheService"></param>
+    /// <param name="testOptions"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    public CourseController(
+        IStringLocalizer<SharedResource> localizer,
+        IDistributedCacheService distributedCacheService,
+        IOptions<TestOptions> testOptions)
     {
-        _distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
-        _localizer = localizer  ?? throw new ArgumentNullException(nameof(localizer));
+        _distributedCacheService = distributedCacheService ?? throw new ArgumentNullException(nameof(distributedCacheService));
+        _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
+        _testOptions = testOptions.Value ?? throw new ArgumentNullException(nameof(localizer));
     }
 
     /// <summary>
@@ -37,7 +50,7 @@ public class CourseController : BaseController
     public async Task<IActionResult> TestRoute()
     {
         var t = await Task.Run(() => 5 + 5);
-        throw new Exception("testik");
+        // throw new Exception("testik");
         return Ok(t);
     }
     
@@ -55,25 +68,32 @@ public class CourseController : BaseController
     [ProducesResponseType(typeof(ErrorResponse), 500)]
     public async Task<IActionResult> Countries()
     {
-        string cachedCountry = await _distributedCache.GetStringAsync("country");
+        var cachedCountry = await _distributedCacheService.GetString("country");
         if(!string.IsNullOrEmpty(cachedCountry))
-        {
             return Ok(new{cachedData = cachedCountry});
-        }
-        var answer = "serializesssss";
-        await _distributedCache.SetStringAsync("country", answer);
+        const string answer = "serializers";
+        await _distributedCacheService.SetString("country", answer, TimeSpan.FromMinutes(5));
         return Ok(answer);
     }
+    
+    /// <summary>
+    /// Эндпоинт для очистки кэша
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("cached/remove")]
     public async Task<IActionResult> ClearCachedCountry()
     {
-        await _distributedCache.RemoveAsync("country");
+        await _distributedCacheService.RemoveString("country");
         return Ok("Removed");
     }
     
+    /// <summary>
+    /// Проверка языка
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("test-lang")]
-    public async Task<IActionResult> TestLang()
+    public IActionResult TestLang()
     {
-        return Ok(_localizer["тест"]);
+        return Ok(string.Join("", _localizer["тест"].Value.Concat(_testOptions.TestOpt)));
     }
 }

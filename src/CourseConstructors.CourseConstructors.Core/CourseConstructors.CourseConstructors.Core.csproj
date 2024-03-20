@@ -8,6 +8,7 @@
 
 
     <ItemGroup>
+      <PackageReference Include="Ardalis.Result.FluentValidation" Version="7.2.0" />
       <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="FluentValidation" Version="11.9.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
@@ -35,12 +36,11 @@
 
 
     <ItemGroup>
-      <Folder Include="CQRS\" />
+      <Folder Include="CQRS\Courses\Commands\" />
+      <Folder Include="CQRS\Courses\Queries\" />
       <Folder Include="Domain\DTOs\" />
-      <Folder Include="Domain\Models\" />
       <Folder Include="Domain\Requests\" />
       <Folder Include="Domain\Responses\" />
-      <Folder Include="Options\" />
       <Folder Include="Resources\Models\" />
     </ItemGroup>
 
@@ -50,6 +50,14 @@
     <ItemGroup>
       <EmbeddedResource Update="Resources\SharedResource.kk-kz.resx">
         <LastGenOutput>SharedResource.kk-kz.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResource.ru-RU.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResource.ru-RU.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResource.kk-KZ.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResource.kk-KZ.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 

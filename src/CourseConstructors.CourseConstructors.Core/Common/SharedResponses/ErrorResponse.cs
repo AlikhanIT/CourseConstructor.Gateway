@@ -11,6 +11,7 @@ public class ErrorResponse
         StatusCode = statusCode;
         Message = message;
     }
+
     public int StatusCode { get; set; }
-    public string Message { get; set; }
+    public string Message { get; set; } = string.Empty;
 }

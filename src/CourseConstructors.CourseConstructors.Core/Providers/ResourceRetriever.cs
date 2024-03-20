@@ -1,15 +1,14 @@
-using CourseConstructors.CourseConstructors.Core.Resources;
-using CourseConstructors.CourseConstructors.Core.Resources;
+using CourseConstructors.CourseConstructors.Core.Interfaces.Providers;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
-namespace CourseConstructors.CourseConstructors.Core.Interfaces.Providers;
+namespace CourseConstructors.CourseConstructors.Core.Providers;
 public class ResourceRetriever : IResourceRetriever
 {
-    private readonly IStringLocalizer<SharedResource> _localizer;
+    private readonly IStringLocalizer<ResourceRetriever> _localizer;
     private readonly ILogger<ResourceRetriever> _logger;
 
-    public ResourceRetriever(IStringLocalizer<SharedResource> localizer,
+    public ResourceRetriever(IStringLocalizer<ResourceRetriever> localizer,
         ILogger<ResourceRetriever> logger)
     {
         _localizer = localizer;

@@ -1,11 +1,10 @@
-﻿using System.Globalization;
-using System.Reflection;
+﻿using System.Reflection;
 using CourseConstructors.CourseConstructors.Core.Interfaces.Providers;
-using CourseConstructors.CourseConstructors.Core.Resources;
+using CourseConstructors.CourseConstructors.Core.Options;
+using CourseConstructors.CourseConstructors.Core.Providers;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CourseConstructors.CourseConstructors.Core;
@@ -21,30 +20,23 @@ public static class ServiceExtension
 
     public static IServiceCollection ConfigureApplicationAssemblies(this IServiceCollection services)
     {
-        services.AddMediatR(Assembly.GetExecutingAssembly());
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddLocalizer();
-
+        services.AddMediatR(Assembly.GetExecutingAssembly())
+            .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+            .AddLocalizer();
+        
         return services;
     }
-
-
+    
     private static IServiceCollection AddLocalizer(this IServiceCollection services)
     {
-        services.AddLocalization();
+        services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
 
-        services.Configure<RequestLocalizationOptions>(options =>
-        {
-            var supportedCultures = new[]
+        services.AddControllers()
+            .AddDataAnnotationsLocalization(options =>
             {
-                new CultureInfo("kk"),
-                new CultureInfo("ru")
-            };
-
-            options.DefaultRequestCulture = new RequestCulture("kk");
-            options.SupportedCultures = supportedCultures;
-            options.SupportedUICultures = supportedCultures;
-        });
+                options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    factory.Create(typeof(SharedResource));
+            });
 
         return services;
     }
@@ -52,6 +44,13 @@ public static class ServiceExtension
     public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IResourceRetriever, ResourceRetriever>();
+
+        return services;
+    }
+    
+    public static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<TestOptions>(configuration.GetSection(TestOptions.SectionName));
 
         return services;
     }

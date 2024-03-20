@@ -1,7 +1,5 @@
 using System.Reflection;
 using CourseConstructors.CourseConstructors.API.Middlewares;
-using CourseConstructors.CourseConstructors.Infrastructure.Persistance;
-using Microsoft.EntityFrameworkCore;
 
 namespace CourseConstructors.CourseConstructors.API;
 

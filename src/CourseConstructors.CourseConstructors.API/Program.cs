@@ -1,10 +1,8 @@
 using System.Globalization;
-using System.Reflection;
 using CourseConstructors.CourseConstructors.API;
 using CourseConstructors.CourseConstructors.Core;
 using CourseConstructors.CourseConstructors.Infrastructure;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,26 +11,34 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 // configure API layer
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.ConfigureVersioning()
     .ConfigureSwaggerGen();
 
 // configure Core layer
 builder.Services.AddScopedServices()
     .ConfigureApplicationAssemblies()
-    .ConfigureApplicationServices();
+    .ConfigureApplicationServices()
+    .ConfigureOptions(builder.Configuration);
 
 // configure Infrastructure layer
-builder.Services.ConfigurePersistance(builder.Configuration);
-builder.Services.AddStackExchangeRedisCache(action=>{
-    var connection = "localhost:6379";
-    action.Configuration = connection;
-});
+builder.Services.ConfigurePersistance(builder.Configuration)
+    .ConfigureCaching(builder.Configuration)
+    .ConfigureServices();
+
+var defaultCulture = new RequestCulture("ru-RU", "ru-RU");
+var supportedCultures = new List<CultureInfo> { new("ru-RU"), new("kk-KZ"), };
+
+var localizationOptions =
+    new RequestLocalizationOptions
+    {
+        DefaultRequestCulture = defaultCulture,
+        SupportedCultures = supportedCultures,
+        SupportedUICultures = supportedCultures,
+        ApplyCurrentCultureToResponseHeaders = true,
+    };
 
 var app = builder.Build();
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-    ApplyCurrentCultureToResponseHeaders = true
-});
 
 if (app.Environment.IsDevelopment())
 {
@@ -46,6 +52,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseHttpsRedirection();
+app.UseRequestLocalization(localizationOptions);
 app.ApplyMiddlewares();
     
 app.Run();

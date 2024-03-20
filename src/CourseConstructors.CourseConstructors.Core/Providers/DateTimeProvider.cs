@@ -1,4 +1,6 @@
-namespace CourseConstructors.CourseConstructors.Core.Interfaces.Providers;
+using CourseConstructors.CourseConstructors.Core.Interfaces.Providers;
+
+namespace CourseConstructors.CourseConstructors.Core.Providers;
 
 public class DateTimeProvider : IDateTimeProvider
 {
