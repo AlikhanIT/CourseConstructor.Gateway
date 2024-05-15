@@ -10,10 +10,13 @@ public class Context : DbContext, IContext
 {
     private readonly IDateTimeProvider _dateTimeProvider;
     public DbSet<Course> Courses { get; set; }
+    public DbSet<CourseUser> CourseToUsers { get; set; }
     public Context(DbContextOptions<Context> options, IDateTimeProvider dateTimeProvider) 
         :base(options)
     {
         _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
+        // Database.EnsureDeleted();
+        // Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +29,13 @@ public class Context : DbContext, IContext
             .WithMany(c => c.Users)
             .HasForeignKey(cu => cu.CourseId);
     }
+    
+    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+        UpdateTimestamps();
+        return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
+
     
     public override int SaveChanges()
     {

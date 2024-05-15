@@ -9,6 +9,8 @@ public interface ICourseRepositoryService
     Task<bool> UpdateCourseDescription(Course course);
     Task<bool> UpdateCourse(Course course);
     Task<bool> DeleteCourse(Course course);
-    Task<Course> GetCourseByCondition(Expression<Func<Course, bool>> condition);
-    Task<List<Course?>> GetCoursesByCondition(Expression<Func<Course?, bool>> condition);
+    Task<Course> GetCourseById(Guid id);
+    Task<List<Course>> GetCoursesByConditionList(Expression<Func<Course?, bool>> condition);
+    Task<bool> AddCourseToUser(CourseUser courseUser);
+    Task<List<Course>> GetUserCourses(Guid userId);
 }

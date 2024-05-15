@@ -6,4 +6,5 @@ namespace CourseConstructors.CourseConstructors.Core.Interfaces.Persistance;
 public interface IContext
 { 
     DbSet<Course> Courses { get; set; }
+    DbSet<CourseUser> CourseToUsers { get; set; }
 }

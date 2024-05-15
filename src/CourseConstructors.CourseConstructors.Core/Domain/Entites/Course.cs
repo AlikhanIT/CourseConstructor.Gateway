@@ -1,23 +1,33 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using CourseConstructors.CourseConstructors.Core.Interfaces.Entities;
 
 namespace CourseConstructors.CourseConstructors.Core.Domain.Entites;
 
 public class Course : BaseEntity
 {
+    public Course()
+    {
+        
+    }
+    public Course(string courseName)
+    {
+        CourseName = courseName;
+    }
     [Key]
-    public int CourseId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
+    public Guid CourseId { get; set; }
     public string CourseName { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public decimal Cost { get; set; }
-    public decimal SaleCost { get; set; }
+    public decimal Cost { get; set; } = 0;
+    public decimal SaleCost { get; set; } = 0;
     public bool IsSale { get; set; } = false;
     public DateTime CreatedDate { get; set; }
     public DateTime EditDate { get; set; }
-    public bool IsDeleted { get; set; }
-    public List<CourseUser> Users { get; set; } = null!;
+    public bool IsDeleted { get; set; } = false;
+    public virtual List<CourseUser> Users { get; set; } = null!;
 
-    public Course DeleteCourse()
+    public Course Delete()
     {
         IsDeleted = true;
 

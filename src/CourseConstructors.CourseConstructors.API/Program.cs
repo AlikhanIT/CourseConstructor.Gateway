@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json.Serialization;
 using CourseConstructors.CourseConstructors.API;
 using CourseConstructors.CourseConstructors.Core;
 using CourseConstructors.CourseConstructors.Infrastructure;
@@ -8,12 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
+builder.ConfigureSerilog(builder.Configuration);
 
 // configure API layer
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.ConfigureVersioning()
-    .ConfigureSwaggerGen();
+    .ConfigureSwaggerGen()
+    .ConfigureMediatR();
 
 // configure Core layer
 builder.Services.AddScopedServices()
@@ -40,15 +46,12 @@ var localizationOptions =
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
+app.UseSwagger()
+    .UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
+        options.RoutePrefix = "swagger";
     });
-}
 
 app.MapControllers();
 app.UseHttpsRedirection();
