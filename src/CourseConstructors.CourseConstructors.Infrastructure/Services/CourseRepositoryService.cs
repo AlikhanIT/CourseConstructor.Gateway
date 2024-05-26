@@ -77,4 +77,91 @@ public class CourseRepositoryService(Context context) : ICourseRepositoryService
             .Where(course => course.Users.Any(user => user.UserId == userId))
             .ToListAsync())!;
     }
+    public async Task<Course> UpdateCourseAsync(Guid courseId, string courseName, string description, decimal cost, decimal saleCost, bool isSale, string imageUrl, bool isDelete)
+    {
+        var course = await context.Courses.FindAsync(courseId);
+        if (course == null) throw new ArgumentException("Курс не найден");
+
+        course.CourseName = courseName;
+        course.Description = description;
+        course.Cost = cost;
+        course.SaleCost = saleCost;
+        course.IsSale = isSale;
+        course.ImageUrl = imageUrl;
+        course.EditDate = DateTime.UtcNow;
+        course.IsDeleted = isDelete;
+
+        await context.SaveChangesAsync();
+        return course;
+    }
+
+    public async Task<Lesson> AddLessonToCourse(Guid courseId, string title)
+    {
+        var lesson = new Lesson
+        {
+            CourseId = courseId,
+            Title = title,
+        };
+        context.Lessons.Add(lesson);
+        await context.SaveChangesAsync();
+        return lesson;
+    }
+
+    public async Task<Lesson> UpdateLesson(Guid lessonId, string title, bool isDelete)
+    {
+        var lesson = await context.Lessons.FindAsync(lessonId);
+        if (lesson == null) throw new ArgumentException("Урок не найден");
+
+        lesson.Title = title;
+        lesson.IsDeleted = isDelete;
+
+        await context.SaveChangesAsync();
+        return lesson;
+    }
+
+    public async Task<ContentItem> AddContentToLesson(Guid lessonId, string contentText, string imageUrl, int order)
+    {
+        var contentItem = new ContentItem
+        {
+            LessonId = lessonId,
+            ContentText = contentText,
+            ImageUrl = imageUrl,
+            Order = order
+        };
+        context.ContentItems.Add(contentItem);
+        await context.SaveChangesAsync();
+        return contentItem;
+    }
+
+    public async Task<ContentItem> UpdateContentItem(Guid contentItemId, string contentText, string imageUrl, int order, bool isDeleted)
+    {
+        var contentItem = await context.ContentItems.FindAsync(contentItemId);
+        if (contentItem == null) throw new ArgumentException("Содержимое урока не найдено");
+
+        contentItem.ContentText = contentText;
+        contentItem.ImageUrl = imageUrl;
+        contentItem.Order = order;
+        contentItem.IsDeleted = isDeleted;
+
+        await context.SaveChangesAsync();
+        return contentItem;
+    }
+    public async Task<List<Lesson>> GetAllLessons(Guid courseId)
+    {
+        return await context.Lessons
+            .Include(l => l.ContentItems) 
+            .Where(l => !l.IsDeleted &&
+                        l.CourseId.Equals(courseId))
+            .ToListAsync();
+    }
+    
+    public async Task<List<ContentItem>> GetAllContentItemsByLesson(Guid lessonId)
+    {
+        return await context.ContentItems
+            .Where(ci => ci.LessonId == lessonId)
+            .OrderBy(ci => ci.Order)
+            .ToListAsync();
+    }
+
+
 }

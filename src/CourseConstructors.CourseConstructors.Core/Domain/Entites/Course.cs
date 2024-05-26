@@ -25,6 +25,8 @@ public class Course : BaseEntity
     public DateTime CreatedDate { get; set; }
     public DateTime EditDate { get; set; }
     public bool IsDeleted { get; set; } = false;
+    public string ImageUrl { get; set; } = string.Empty;
+    public virtual List<Lesson> Lessons { get; set; } 
     public virtual List<CourseUser> Users { get; set; } = null!;
 
     public Course Delete()

@@ -13,4 +13,14 @@ public interface ICourseRepositoryService
     Task<List<Course>> GetCoursesByConditionList(Expression<Func<Course?, bool>> condition);
     Task<bool> AddCourseToUser(CourseUser courseUser);
     Task<List<Course>> GetUserCourses(Guid userId);
+    Task<Course> UpdateCourseAsync(Guid courseId, string courseName, string description, decimal cost, decimal saleCost, bool isSale, string imageUrl, bool isDelete);
+    Task<Lesson> AddLessonToCourse(Guid courseId, string title);
+    Task<Lesson> UpdateLesson(Guid lessonId, string title, bool isDelete);
+    Task<ContentItem> AddContentToLesson(Guid lessonId, string contentText, string imageUrl, int order);
+    Task<ContentItem> UpdateContentItem(Guid contentItemId, string contentText, string imageUrl, int order,
+        bool isDeleted);
+
+    Task<List<ContentItem>> GetAllContentItemsByLesson(Guid lessonId);
+    Task<List<Lesson>> GetAllLessons(Guid courseId);
+
 }
